@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <widget xmlns = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
-        id        = "ir.smgroup.vadieh"
+        id        = "ir.smgroup.nehzat2"
         version   = "1.10" >
 		
 		
-    <name>ودیعه الحسین</name>
-    <description>ودیعه الحسین (علیه السلام)</description>
+    <name>نهضت</name>
+    <description>سامانه ورود و خروج</description>
     <author href="http://smgroup.ir" email="info@smgroup.ir">Sorush Mehr Rezvan</author>
     <!--
 		ir.smgroup.saveimage
