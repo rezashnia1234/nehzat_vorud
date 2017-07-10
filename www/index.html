@@ -76,7 +76,7 @@
 						"Cancelled: " + result.cancelled);
 					*/
 					//alert("Result: " + result.text);
-					get_user_data(result.text,"");
+					get_user_data(result.text);
 			  },
 			  function (error) {
 				  //alert("Scanning failed: " + error);
@@ -109,12 +109,13 @@
 				//alert("You selected button number " + results.buttonIndex + " and entered " + results.input1);
 				if(results.buttonIndex==1 && results.input1 != "")
 				{
-					get_user_data("",results.input1);
+					get_user_data(results.input1);
 				}
 			}
 		}
 
-		function get_user_data(id,KodeMeli) {
+		function get_user_data(id) {
+			
 			//var networkState = navigator.connection.type;
 			if ( false && networkState == Connection.NONE) {
 				navigator.notification.alert(
@@ -131,16 +132,22 @@
 					navigator.vibrate(100);
 				}
 				$(".mypreload").css("display","block");
-				var URL = "http://vadieh.net/registration/mobile-app/check.php";
+				var URL = "http://www.postermovement.com/naghsh/index.php?option=com_rsform&task=submissions&no_html=1&T=786";
 				var URL_image = "http://vadieh.net/registration/";
 				$.ajax({
 						url: URL,
-						type: "GET",
+						type: "POST",
 						data: {
-							app: "true",
-							act: "baresi",
-							id: id,
-							KodeMeli: KodeMeli
+							ticketvalue: id,
+							ticketname: "kodemeli",
+							formId: "3",
+							fields: "name,family,kodemeli,type,eskan,jensiyat,coderahgiri,paziresh,pazireshe_salon,muze,carte_hediye,barname_vije_1,barname_vije_2,barname_vije_3,barname_vije_4,barname_vije_5,nahar_1,nahar_2,nahar_3,sham_1,sham_2,sham_3",
+							answername: "answername",
+							barcodejob: "show",
+							barcodecheckfield: "paziresh",
+							barcodedata: "",
+							barcodefalse: "",
+							barcodetrue: "",
 						},
 						async: true,
 						success : function(text)
@@ -150,7 +157,9 @@
 							$('html, body').animate({
 								scrollTop: 0
 							}, 0);
-							$('#show_result').html(text);
+							//$('#show_result').html(text);
+							$('#show_result_container').html(text);
+							$('#show_result .panel-title').html("نمایش اطلاعات");
 							$(".mypreload").css("display","none");
 						},
 						error: function(jqXHR, exception) {
@@ -339,9 +348,16 @@ a.change_page_vorud::after {
 	background-color:#479c33;
 }
 div#show_result {
-    margin-top: 69px;
+    margin-top: 90px;
     padding: 0 7px 67px 7px;
 }
+td {
+    background-color: #ffffff;
+    color: #000000;
+    border-radius: 0 !important;
+	font-family: IRANSans !important;
+}
+
 </style>	
 </head>
 <body onload="init();" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" id="body">
@@ -355,18 +371,67 @@ div#show_result {
 			<a class="amar_btn" href="amar.html"><img src="images/analytics-icon.svg" /></a>
 			<div class="besmelah" >بسم الله الرحمن الرحیم</div>
 			<div class="change_page" >
-				<a href="vorud.html" class="change_page_vorud "><span></span>ورود</a>
-				<a href="index.html" class="change_page_baresi selected"><span></span>بررسی</a>
-				<a href="khoruj.html" class="change_page_khoruj "><span></span>خروج</a>
+				<a href="index.html" class="change_page_baresi "  style="width: 100%;"><span></span>منو خدمات</a>
 			</div>
-			<div class="start_scan bottom_fix" onclick="StartScan();">اســکن جدیــد</div>
-			<a class="manual_data bottom_fix" href="#" onclick="keyboard();" ><img src="images/keyboard.svg" /></a>
 			<div id="show_result">
+<style>
+li {
+  border: 1px solid #ffffff;
+  box-shadow: 0 0 3px #ffffff;
+  box-sizing: border-box;
+  display: block;
+  float: right;
+  font-size: 13px;
+  height: 40px;
+  line-height: 40px;
+  list-style: outside none none;
+  margin: 0;
+  padding: 0;
+  width: 50%;
+}
+li a{
+	color:#ffffff;
+	display:block;
+	width:100%;
+	height:100%;
+}
+</style>
 				<div class="panel bg-info">
-					<div class="panel-heading">
-						<h6 class="panel-title">منتظر اولین اسکن</h6>
+					<div id="show_result_container" class="panel-body text-center" style="direction:rtl;text-align:right;">
+						<ul style="width:100%;direction:rtl;text-align:center;">
+							<li style="width:100%;"><a href="check.html" >بررسی وضعیت</a></li>
+							<li><a href="sabte_paziresh.html">ثبت پذیرش هتل</a></li>
+							<li><a href="laghv_paziresh.html">لغو پذیرش هتل</a></li>
+							<li><a href="sabte_pazireshe_salon.html">ثبت پذیرش سالن</a></li>
+							<li><a href="laghv_pazireshe_salon.html">لغو پذیرش سالن</a></li>
+							<li><a href="sabte_muze.html">ثبت ورود موزه</a></li>
+							<li><a href="laghv_muze.html">لغو ورود موزه</a></li>
+							<li><a href="sabte_nahar_1.html">ثبت تحویل نهار-1</a></li>
+							<li><a href="laghv_nahar_1.html">لغو تحویل نهار-1</a></li>
+							<li><a href="sabte_nahar_2.html">ثبت تحویل نهار-2</a></li>
+							<li><a href="laghv_nahar_2.html">لغو تحویل نهار-2</a></li>
+							<li><a href="sabte_nahar_3.html">ثبت تحویل نهار-3</a></li>
+							<li><a href="laghv_nahar_3.html">لغو تحویل نهار-3</a></li>
+							<li><a href="sabte_sham_1.html">ثبت تحویل شام-1</a></li>
+							<li><a href="laghv_sham_1.html">لغو تحویل شام-1</a></li>
+							<li><a href="sabte_sham_2.html">ثبت تحویل شام-2</a></li>
+							<li><a href="laghv_sham_2.html">لغو تحویل شام-2</a></li>
+							<li><a href="sabte_sham_3.html">ثبت تحویل شام-3</a></li>
+							<li><a href="laghv_sham_3.html">لغو تحویل شام-3</a></li>
+							<li><a href="sabte_barname_vije_1.html">ثبت ورود برنامه ویژه-1</a></li>
+							<li><a href="laghv_barname_vije_1.html">لغو ورود برنامه ویژه-1</a></li>
+							<li><a href="sabte_barname_vije_2.html">ثبت ورود برنامه ویژه-2</a></li>
+							<li><a href="laghv_barname_vije_2.html">لغو ورود برنامه ویژه-2</a></li>
+							<li><a href="sabte_barname_vije_3.html">ثبت ورود برنامه ویژه-3</a></li>
+							<li><a href="laghv_barname_vije_3.html">لغو ورود برنامه ویژه-3</a></li>
+							<li><a href="sabte_barname_vije_4.html">ثبت ورود برنامه ویژه-4</a></li>
+							<li><a href="laghv_barname_vije_4.html">لغو ورود برنامه ویژه-4</a></li>
+							<li><a href="sabte_barname_vije_5.html">ثبت ورود برنامه ویژه-5</a></li>
+							<li><a href="laghv_barname_vije_5.html">لغو ورود برنامه ویژه-5</a></li>
+							<li><a href="sabte_carte_hediye.html">ثبت تحویل کارت هدیه</a></li>
+							<li><a href="laghv_carte_hediye.html">لغو تحویل کارت هدیه</a></li>
+						</ul>
 					</div>
-					<div class="panel-body text-center">...</div>
 				</div>
 			</div>
 	</div>

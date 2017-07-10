@@ -70,7 +70,7 @@
 		   cordova.plugins.barcodeScanner.scan(
 			  function (result) {
 					//alert("Result: " + result.text);
-					get_user_data(result.text,"");
+					get_user_data(result.text);
 			  },
 			  function (error) {
 				  //alert("Scanning failed: " + error);
@@ -103,12 +103,12 @@
 				//alert("You selected button number " + results.buttonIndex + " and entered " + results.input1);
 				if(results.buttonIndex==1 && results.input1 != "")
 				{
-					get_user_data("",results.input1);
+					get_user_data(results.input1);
 				}
 			}
 		}
-
-		function get_user_data(id,KodeMeli) {
+		
+		function get_user_data(id) {
 			//var networkState = navigator.connection.type;
 			if ( false && networkState == Connection.NONE) {
 				navigator.notification.alert(
@@ -125,16 +125,22 @@
 					navigator.vibrate(100);
 				}
 				$(".mypreload").css("display","block");
-				var URL = "http://vadieh.net/registration/mobile-app/out.php";
+				var URL = "http://www.postermovement.com/naghsh/index.php?option=com_rsform&task=submissions&no_html=1&T=786";
 				var URL_image = "http://vadieh.net/registration/";
 				$.ajax({
 						url: URL,
-						type: "GET",
+						type: "POST",
 						data: {
-							app: "true",
-							act: "baresi",
-							id: id,
-							KodeMeli: KodeMeli
+							ticketvalue: id,
+							ticketname: "kodemeli",
+							formId: "3",
+							fields: "paziresh,name,family,kodemeli,type,eskan,jensiyat,coderahgiri,paziresh,pazireshe_salon,muze,carte_hediye,barname_vije_1,barname_vije_2,barname_vije_3,barname_vije_4,barname_vije_5,nahar_1,nahar_2,nahar_3,sham_1,sham_2,sham_3",
+							answername: "answername",
+							barcodejob: "check",
+							barcodecheckfield: "barname_vije_1",
+							barcodedata: "1",
+							barcodefalse: "مورد تائید نمی باشد",
+							barcodetrue: "مورد تائید می باشد",
 						},
 						async: true,
 						success : function(text)
@@ -144,7 +150,8 @@
 							$('html, body').animate({
 								scrollTop: 0
 							}, 0);
-							$('#show_result').html(text);
+							$('#show_result_container').html(text);
+							$('#show_result .panel-title').html("نمایش اطلاعات");
 							$(".mypreload").css("display","none");
 						},
 						error: function(jqXHR, exception) {
@@ -332,10 +339,20 @@ a.change_page_vorud::after {
 	z-index: -3;
 	background-color:#479c33;
 }
+.change_page a.selected.red span{
+	background-color:#9c333c;
+}
 div#show_result {
-    margin-top: 69px;
+    margin-top: 90px;
     padding: 0 7px 67px 7px;
 }
+td {
+    background-color: #ffffff;
+    color: #000000;
+    border-radius: 0 !important;
+	font-family: IRANSans !important;
+}
+
 </style>	
 </head>
 <body onload="init();" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" id="body">
@@ -345,13 +362,12 @@ div#show_result {
 				<div style="z-index: 1011; position: fixed; padding: 0px; margin: 0px; width: 100%; top: 28%; left: 0%; text-align: center;border: medium none;overflow:visible;" class="blockUI blockMsg blockPage"><img src="images/preloader.gif"></div>
 				<div style="z-index: 1012; position: fixed; padding: 0px; margin: 0px; width: 100%; top: 50%; left: 0%; text-align: center;border: medium none;overflow:visible;height:500px;" class="blockUI blockMsg blockPage"><img src="images/loading.png" width="70%"></div>
 			</div>
-			<a class="reload_btn" href="khoruj.html"><img src="images/reload.svg" /></a>
+			<a class="reload_btn" href="vorud.html"><img src="images/reload.svg" /></a>
 			<a class="amar_btn" href="amar.html"><img src="images/analytics-icon.svg" /></a>
 			<div class="besmelah" >بسم الله الرحمن الرحیم</div>
 			<div class="change_page" >
-				<a href="vorud.html" class="change_page_vorud "><span></span>ورود</a>
-				<a href="index.html" class="change_page_baresi "><span></span>بررسی</a>
-				<a href="khoruj.html" class="change_page_khoruj selected"><span></span>خروج</a>
+				<a href="index.html" class="change_page_baresi "  style="width: 100%;"><span></span>منو خدمات</a>
+				<a href="index.html" class="change_page_baresi selected" style="width: 100%;"><span></span>ثبت برنامه ویژه 1</a>
 			</div>
 			<div class="start_scan bottom_fix" onclick="StartScan();">اســکن جدیــد</div>
 			<a class="manual_data bottom_fix" href="#" onclick="keyboard();" ><img src="images/keyboard.svg" /></a>
@@ -360,7 +376,7 @@ div#show_result {
 					<div class="panel-heading">
 						<h6 class="panel-title">منتظر اولین اسکن</h6>
 					</div>
-					<div class="panel-body text-center">...</div>
+					<div id="show_result_container" class="panel-body text-center" style="direction:rtl;text-align:right;">...</div>
 				</div>
 			</div>
 	</div>
