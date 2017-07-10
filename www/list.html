@@ -21,6 +21,8 @@
     <script src="js/fastclick.js"></script>
     <script src="js/persian_number_to_english.js"></script>
     <script src="js/index.js"></script>
+	<link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css"/>
+	<script type="text/javascript" src="DataTables/datatables.min.js"></script>
 	<script>
 		function init() {		
 			console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start init()');
@@ -105,7 +107,7 @@
 			else
 			{
 				$(".mypreload").css("display","block");
-				var URL = "http://www.postermovement.com/naghsh/index.php?option=com_rsform&task=submissions_report&no_html=1&";
+				var URL = "http://www.postermovement.com/naghsh/index.php?option=com_rsform&task=submissions_list&no_html=1&";
 				var URL_image = "http://vadieh.net/registration/";
 				$.ajax({
 						url: URL,
@@ -122,7 +124,49 @@
 							$('html, body').animate({
 								scrollTop: 0
 							}, 0);
-							$('#show_result').html("<pre style='direction:ltr;text-align:left;'>" + text + "</pre>");
+							$('#show_result').html(text);
+							var DataTable2 = $('#DataTable').DataTable({
+								dom: '<"datatable-header"fB><"datatable-scroll-wrap"t><"datatable-footer"ilp>',
+								language: {
+									paginate: { 'first': 'اولین', 'last': 'آخرین', 'next': '&larr;', 'previous': '&rarr;' },
+									search: '<span>جستجو :</span> _INPUT_',
+									lengthMenu: '_MENU_',
+									zeroRecords: "درکمال تاسف ، هیچ مطلبی یافت نشد",
+									processing: "درحال پردازش اطلاعات",
+									info: "نمایش _START_ تا _END_ از _TOTAL_ مطلب",
+									infoEmpty: "هیچ گزینه ای یافت نشد",
+									infoFiltered: "(مطالب گزیده شده از مجموع  _MAX_ عدد)",
+								},
+								buttons: [
+									{
+										extend: 'colvis',
+										text: 'مدیریت لیست ستون ها',
+										className: 'btn btn-icon bg-blue'
+									}
+								],
+								responsive: false,
+							});
+							DataTable2.column(0).visible(false);//name
+							DataTable2.column(2).visible(false);//kodemili
+							DataTable2.column(3).visible(false);//type
+							DataTable2.column(4).visible(false);//eskan
+							DataTable2.column(5).visible(false);//jensyat
+							DataTable2.column(6).visible(false);//koderahgiri
+							DataTable2.column(7).visible(false);
+							DataTable2.column(8).visible(false);
+							DataTable2.column(9).visible(false);
+							DataTable2.column(10).visible(false);
+							DataTable2.column(11).visible(false);
+							DataTable2.column(12).visible(false);
+							DataTable2.column(13).visible(false);
+							DataTable2.column(14).visible(false);
+							DataTable2.column(15).visible(false);
+							DataTable2.column(16).visible(false);
+							DataTable2.column(17).visible(false);
+							DataTable2.column(18).visible(false);
+							DataTable2.column(19).visible(false);
+							DataTable2.column(20).visible(false);
+							DataTable2.column(21).visible(false);
 							$(".mypreload").css("display","none");
 						},
 						error: function(jqXHR, exception) {
@@ -319,10 +363,20 @@ li {
     direction: rtl;
     text-align: right;
 }
+.datatable-header {
+  z-index: 2;
+}
+.dt-button span {
+  font-size: 12px;
+  font-weight: normal;
+}
+.dt-button {
+  line-height: 8px;
+}
 </style>	
 </head>
 <body onload="init();" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" id="body">
-	<div class="container " id="container" >
+	<div class="container " id="container" style="width: 100%; margin: 0px; padding: 0px;" >
 			<div id="ajax" class="mypreload">
 				<div style="z-index: 1000; border: medium none; margin: 0px; padding: 0px; width: 100%; height: 100%; top: 0px; left: 0px; background-color: #322958; opacity: 1; cursor: default; position: fixed;overflow:visible;" class="blockUI blockOverlay"></div>
 				<div style="z-index: 1011; position: fixed; padding: 0px; margin: 0px; width: 100%; top: 28%; left: 0%; text-align: center;border: medium none;overflow:visible;" class="blockUI blockMsg blockPage"><img src="images/preloader.gif"></div>
@@ -332,10 +386,9 @@ li {
 			<a class="amar_btn" href="amar.html"><img src="images/analytics-icon.svg" /></a>
 			<div class="besmelah" >بسم الله الرحمن الرحیم</div>
 			<div class="change_page" >
-				<a href="index.html" class="change_page_baresi "  style="width: 50%;"><span>منو خدمات</span></a>
-				<a href="list.html" class="change_page_baresi "  style="width: 50%;"><span>لیست اسامی</span></a>
+				<a href="index.html" class="change_page_baresi "  style="width: 100%;"><span></span>منو خدمات</a>
 			</div>
-			<div id="show_result">
+			<div id="show_result" style="direction:rtl;">
 
 			</div>
 	</div>
