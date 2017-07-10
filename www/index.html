@@ -86,7 +86,7 @@
 				  preferFrontCamera : false, // iOS and Android
 				  showFlipCameraButton : false, // iOS and Android
 				  showTorchButton : true, // iOS and Android
-				  torchOn: true, // Android, launch with the torch switched on (if available)
+				  torchOn: false, // Android, launch with the torch switched on (if available)
 				  prompt : "Place a barcode inside the scan area", // Android
 				  resultDisplayDuration: 0, // Android, display scanned text for X ms. 0 suppresses it entirely, default 1500
 				  //formats : "QR_CODE,PDF_417", // default: all but PDF_417 and RSS_EXPANDED
@@ -361,7 +361,7 @@ td {
 </style>	
 </head>
 <body onload="init();" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" id="body">
-	<div class="container " id="container" >
+	<div class="container " id="container" style="padding: 0px;">
 			<div id="ajax" class="mypreload">
 				<div style="z-index: 1000; border: medium none; margin: 0px; padding: 0px; width: 100%; height: 100%; top: 0px; left: 0px; background-color: #322958; opacity: 1; cursor: default; position: fixed;overflow:visible;" class="blockUI blockOverlay"></div>
 				<div style="z-index: 1011; position: fixed; padding: 0px; margin: 0px; width: 100%; top: 28%; left: 0%; text-align: center;border: medium none;overflow:visible;" class="blockUI blockMsg blockPage"><img src="images/preloader.gif"></div>
@@ -394,11 +394,12 @@ li a{
 	display:block;
 	width:100%;
 	height:100%;
+	font-size: 13px;
 }
 </style>
 				<div class="panel bg-info">
-					<div id="show_result_container" class="panel-body text-center" style="direction:rtl;text-align:right;">
-						<ul style="width:100%;direction:rtl;text-align:center;">
+					<div id="show_result_container" class="panel-body text-center" style="direction:rtl;text-align:right;padding: 0;">
+						<ul style="width:100%;direction:rtl;text-align:center;padding: 0;margin: 0;">
 							<li style="width:100%;"><a href="check.html" >بررسی وضعیت</a></li>
 							<li><a href="sabte_paziresh.html">ثبت پذیرش هتل</a></li>
 							<li><a href="laghv_paziresh.html">لغو پذیرش هتل</a></li>
