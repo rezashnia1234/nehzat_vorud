@@ -144,6 +144,7 @@
 										className: 'btn btn-icon bg-blue'
 									}
 								],
+								paging:   false,
 								responsive: false,
 							});
 							DataTable2.column(0).visible(false);//name
@@ -167,7 +168,9 @@
 							DataTable2.column(19).visible(false);
 							DataTable2.column(20).visible(false);
 							DataTable2.column(21).visible(false);
-							$(".mypreload").css("display","none");
+							setTimeout(function(){
+								$(".mypreload").css("display","none");
+							}, 1000);
 						},
 						error: function(jqXHR, exception) {
 							$(".mypreload").css("display","none");
