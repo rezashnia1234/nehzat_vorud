@@ -32,6 +32,7 @@
 		function onDeviceReady() {
 			var networkState = navigator.connection.type;
 			//UserAgent.set("A786-110-A");
+			alert("onDeviceReady");
 			FastClick.attach(document.body);
 			if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
 				document.addEventListener("backbutton", go_back_index, false);
