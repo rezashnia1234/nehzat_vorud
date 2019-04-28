@@ -95,6 +95,7 @@
 	   <string>Access to the camera is switched off, please enable it in app settings to continue.</string>
 	</edit-config>
 
+	<plugin spec="https://github.com/NeoLSN/cordova-plugin-android-permissions.git" source="git" />
 
 
     <!-- Define app icon      -->
